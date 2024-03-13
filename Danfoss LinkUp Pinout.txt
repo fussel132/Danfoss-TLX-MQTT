@@ -1,0 +1,32 @@
+Danfoss TLX Pro:
+
+Linker RJ45 RS-485 Bus (T568B Cat5 Kabel):
+
+GND		Orange/Weiß
+GND		Orange
+RX/TX A (-)	Grün/Weiß
+BIAS L		Blau
+BIAS H		Blau/Weiß
+RX/TX B (+)	Grün
+NC		Braun/Weiß
+NC		Braun
+
+Rechten Bus abschließen! Dafür bei den Klemmleisten 4-6 und 5-7 miteinander verbinden.
+Grafik siehe DanfossTLXInstallationManual.pdf
+
+
+RS485 to TTL Converter:
+
+Converter ---- 	T568B RJ45 Kabel 	---- 	Danfoss RS485 Bus (links)
+
+A+	----	Grün			----	RX/TX B (+)
+B-	----	Grün/Weiß		----	RX/TX A (-)
+GND	----	Orange + Orange/Weiß	----	GND + GND
+
+
+D1 Mini ESP32	---- 	Converter
+
+IO17 (U2 TX)	----	TXD
+IO16 (U2 RX)	----	RXD
+VCC		----	VCC
+GND		----	GND

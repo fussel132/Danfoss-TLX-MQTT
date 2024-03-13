@@ -1,48 +1,14 @@
 # Danfoss-TLX
-RS485 Communication with Danfoss TLX solar inverter and REST server
+**RS485 Communication with Danfoss TLX solar inverter and MQTT publishing.**
 
-I use it for Home Assistant integration where each parameter/value can be read as a sensor.
+I was very happy with AMajland's REST version but to get some more relevant data (like live power) pushed to HomeAssistant more frequently, I introduced "priorities" and switched from REST to MQTT so the ESP does not need to handle an entire webserver and thus slow down the communication with the inverter.
 
-See DanfossTLX-RS485.h for parameters
+>The communication with the inverter is based on [TorbenNor](https://github.com/TorbenNor)'s `TLX-simple.ino` which can be found [here](https://github.com/TorbenNor/Danfoss-TLX).
+Some error-handling and quality-checks are forked from [AMajland](https://github.com/AMajland), so thanks a lot to you two!
 
-    sensor:
-      # Danfoss TLX
-      # Energy
-      - platform: rest
-        resource: http://[IP-Address]/TotalE
-        name: "TLX Total Energy Production"
-        method: GET
-        value_template: "{{ value_json.value |round(3)}}"
-        unit_of_measurement: kWh
-        device_class: 'energy'
-        state_class: total_increasing
-            
-But since HA would fire request for all entities almost at the same time it could'nt keep up and some would end up unavailable.
-So instead of having each value returned in a seperat call i've added them all in stame same json return. See configuration.yaml for all rest sensors
+## Hardware Setup
 
-    rest:
-      - resource: http://[IP-Address]/All
-        sensor:
-          # Info
-          - name: "TLX Operation Mode"
-            value_template: "{{ value_json.OpMode }}"
-          - name: "TLX Operation Mode Text"
-            value_template: "{{ value_json.OpModeTxt }}"
-          - name: "TLX Product Number"
-            value_template: "{{ value_json.Product }}"
-          - name: "TLX Serial" 
-           value_template: "{{ value_json.Serial }}"        
-          # Produkction Energy
-          - name: "TLX Total Energy Production"
-            value_template: "{{ value_json.TotalE |round(3)}}"
-            unit_of_measurement: kWh
-            device_class: 'energy'
-            state_class: total_increasing
-            ...
-            ...
-         
-Based on TLX-ino by Torben https://github.com/TorbenNor/Danfoss-TLX
-    
+TODO
 
 Board LOLIN D32                                        
 https://www.aliexpress.com/item/32808551116.htm
@@ -51,7 +17,11 @@ https://www.aliexpress.com/item/32808551116.htm
 R411A01 mini 3.3V Auto RS485 to TTL232 Converter Board  
 https://www.aliexpress.com/item/32782552104.html
 
+## Configure and Install Software
 
+TODO
+
+MQTT Broker (like Mosquitto)
 
 Used Libraries - output from verbose compile
 Multiple libraries were found for "WiFi.h" Used:       ...\packages\esp32\hardware\esp32\2.0.3\libraries\WiFi
@@ -60,11 +30,6 @@ Using library WebServer at version 2.0.0 in folder:    ...\packages\esp32\hardwa
 Using library ArduinoJson at version 6.19.4 in folder: ...\libraries\ArduinoJson 
 Using library FS at version 2.0.0 in folder:           ...\packages\esp32\hardware\esp32\2.0.3\libraries\FS 
 
+## Home Assistant Integration
 
-
-# BOM:
-esp32 lolin.
-
-R411A01 mini 3.3V Auto RS485 to TTL232 Converter Board or similar.
-
-
+TODO
