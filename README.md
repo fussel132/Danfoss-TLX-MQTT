@@ -1,6 +1,7 @@
 # Danfoss-TLX
 **RS485 Communication with Danfoss TLX solar inverter and MQTT publishing.**
 
+> [!WARNING] 
 > **Under development! Not ready for usage yet**
 
 I was very happy with AMajland's REST version but to get some more relevant data (like live power) pushed to HomeAssistant more frequently, I introduced "priorities" and switched from REST to MQTT so the ESP does not need to handle an entire webserver and thus slow down the communication with the inverter.
